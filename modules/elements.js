@@ -29,6 +29,12 @@ export const createInput = () => {
 	return input;
 }
 
+export const getValue = () => {
+	const inputElement = createInput();
+	const value = inputElement.value;
+}
+getValue();
+
 export const createButtonPrimary = () => {
 	const button = document.createElement('button');
 	button.classList.add('btn', 'btn-primary', 'me-3');
