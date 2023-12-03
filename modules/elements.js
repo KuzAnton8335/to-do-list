@@ -29,6 +29,7 @@ export const createInput = () => {
 	return input;
 }
 
+
 export const getValue = () => {
 	const inputElement = createInput();
 	const value = inputElement.value;
