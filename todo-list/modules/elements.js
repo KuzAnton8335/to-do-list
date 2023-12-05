@@ -1,4 +1,5 @@
 
+
 export const createThead = () => {
 	const thead = document.createElement('thead');
 	thead.insertAdjacentHTML('beforeend', `
@@ -92,8 +93,6 @@ export const createInput = () => {
 export const createLabel = () => {
 	const label = document.createElement('label');
 	label.classList.add('form-group', 'me-3', 'mb-0');
-	const inputTask = createInput();
-	label.append(inputTask);
 	return label;
 }
 export const createForm = () => {

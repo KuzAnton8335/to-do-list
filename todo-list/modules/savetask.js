@@ -1,4 +1,7 @@
-import { createButtonDel, createButtonPrimary, createForm, createInput, createLabel } from "./elements.js";
+import {
+	createButtonDel, createButtonPrimary, createForm, createInput, createLabel,
+	createTbody, createBtnDel, createBntComplecte, createTable
+} from "./elements.js";
 import { saveToLocalStorage, tasks } from "./storage.js";
 
 
@@ -7,71 +10,81 @@ export const myButtonPrim = createButtonPrimary();
 export const myForm = createForm();
 export const myButtonDel = createButtonDel();
 export const myLabel = createLabel();
-
+export const myTable = createTable();
+export const myTbody = createTbody();
+export const myTabelBtnDel = createBtnDel();
+export const myTabelBtnComplecte = createBntComplecte();
+myLabel.append(myInput);
 
 
 
 const addTask = (e) => {
 	e.preventDefault();
 
-
 	const input = myInput.value;
 
 	const idTask = Math.random().toString().substring(2, 10);
 	let newTask = {
-		id: idTask,
+		id: Date.now(),
+		st: idTask,
 		text: input,
 		done: false,
 	}
 	tasks.push(newTask);
 
 	saveToLocalStorage();
+
+
+	//Добавление дел
+	myButtonPrim.addEventListener('click', (e) => {
+		e.preventDefault();
+		if (myInput.value.trim() !== '') {
+			myInput.value = '';
+			myButtonPrim.disabled = true;
+		}
+	});
+
+	myInput.addEventListener('input', () => {
+		if (myInput.value.trim() === '') {
+			myButtonPrim.disabled = true;
+		} else {
+			myButtonPrim.disabled = false;
+		}
+	})
+
+	myButtonDel.addEventListener('click', () => {
+		myInput.value = '';
+		myButtonPrim.disabled = true;
+	})
+
+	renderTask(newTask);
+
+	input.value = '';
+	input.focus();
+
 }
 
 myForm.addEventListener('submit', addTask);
 
-// export const createForm = () => {
-// 	const form = document.createElement('form');
-// 	form.classList.add('d-flex', 'align-items-center', 'mb-3');
 
-// 	const label = createLabel();
-// 	const buttonPrimary = createButtonPrimary();
-// 	const buttonDel = createButtonDel();
+const renderTask = (task) => {
+	const newRow = document.createElement('tr');
+	newRow.classList.add("table-light");
+	newRow.insertAdjacentHTML('beforeend', `
+		<td>${task.id}</td>
+		<td class="task">
+		  ${task.text}
+		</td>
+		<td>В процессе</td>
+	`)
+	const td = document.createElement('td');
+	td.append(myTabelBtnDel, myTabelBtnComplecte)
+	newRow.append(td);
+	const tbody = document.querySelector('tbody');
+	tbody.append(newRow);
+}
 
-// 	form.append(label, buttonPrimary, buttonDel);
 
-// 	// Добавляем обработчик события для кнопки "Сохранить"
-// 	buttonPrimary.addEventListener('click', (event) => {
-// 	  event.preventDefault();
-// 	  // Проверяем, что поле ввода не пустое
-// 	  if (inputTask.value.trim() !== '') {
-// 		 // Добавляем новое дело
-// 		 // Очищаем поле ввода
-// 		 inputTask.value = '';
-// 		 // Блокируем кнопку "Сохранить"
-// 		 buttonPrimary.disabled = true;
-// 	  }
-// 	});
 
-// 	// Добавляем обработчик события для поля ввода
-// 	inputTask.addEventListener('input', () => {
-// 	  // Если поле ввода пустое, блокируем кнопку "Сохранить"
-// 	  if (inputTask.value.trim() === '') {
-// 		 buttonPrimary.disabled = true;
-// 	  } else {
-// 		 buttonPrimary.disabled = false;
-// 	  }
-// 	});
-
-// 	// Добавляем обработчик события для кнопки "Очистить"
-// 	buttonDel.addEventListener('click', () => {
-// 	  // Очищаем поле ввода
-// 	  inputTask.value = '';
-// 	  // Блокируем кнопку "Сохранить"
-// 	  buttonPrimary.disabled = true;
-// 	});
-
-// 	return form;
-//  };
 
 

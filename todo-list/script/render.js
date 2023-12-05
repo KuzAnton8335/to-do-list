@@ -25,9 +25,6 @@ const init = (selectorApp, title) => {
 	app.classList.add("vh-100", "w-100", "d-flex", "align-items-center", "justify-content-center", "flex-column")
 	const h3 = createTitle(title);
 	const Form = myForm;
-	const Label = createLabel();
-	const btnPrimary = createButtonPrimary();
-	const btnDel = createButtonDel();
 	const tableWrapper = createTableWrapper();
 	Form.append(myLabel, myButtonPrim, myButtonDel)
 	app.append(h3, Form, tableWrapper);
