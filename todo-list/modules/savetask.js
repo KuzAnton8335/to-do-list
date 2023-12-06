@@ -5,7 +5,7 @@ import {
 	createTable,
 	createTbody
 } from "./elements.js";
-import { saveToLocalStorage, tasks } from "./storage.js";
+import { indexTasks, saveToLocalStorage, tasks } from "./storage.js";
 
 
 export const myInput = createInput();
@@ -18,6 +18,8 @@ export const myTbody = createTbody();
 export const myTabelBtnDel = createBtnDel();
 export const myTabelBtnComplecte = createBntComplecte();
 myLabel.append(myInput);
+
+const numberTasks = indexTasks;
 
 
 
@@ -62,8 +64,8 @@ const addTask = (e) => {
 
 	renderTask(newTask);
 
-	input.value = '';
-	input.focus();
+	myInput.value = '';
+	myInput.focus();
 
 }
 
@@ -74,7 +76,7 @@ export const renderTask = (task) => {
 	const newRow = document.createElement('tr');
 	newRow.classList.add("table-light");
 	newRow.insertAdjacentHTML('beforeend', `
-		<td>${task.id}</td>
+		<td>${numberTasks}</td>
 		<td class="task">
 		  ${task.text}
 		</td>
@@ -86,8 +88,6 @@ export const renderTask = (task) => {
 	const tbody = document.querySelector('tbody');
 	tbody.append(newRow);
 }
-
-
 
 
 
