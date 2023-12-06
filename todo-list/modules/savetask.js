@@ -1,6 +1,9 @@
 import {
+	createBntComplecte,
+	createBtnDel,
 	createButtonDel, createButtonPrimary, createForm, createInput, createLabel,
-	createTbody, createBtnDel, createBntComplecte, createTable
+	createTable,
+	createTbody
 } from "./elements.js";
 import { saveToLocalStorage, tasks } from "./storage.js";
 
@@ -67,7 +70,7 @@ const addTask = (e) => {
 myForm.addEventListener('submit', addTask);
 
 
-const renderTask = (task) => {
+export const renderTask = (task) => {
 	const newRow = document.createElement('tr');
 	newRow.classList.add("table-light");
 	newRow.insertAdjacentHTML('beforeend', `
