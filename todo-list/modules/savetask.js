@@ -5,7 +5,7 @@ import {
 	createTable,
 	createTbody
 } from "./elements.js";
-import { indexTasks, saveToLocalStorage, tasks } from "./storage.js";
+import { indexTasks, removeFromLocalStorage, saveToLocalStorage, tasks } from "./storage.js";
 
 
 export const myInput = createInput();
@@ -75,7 +75,8 @@ const deleteTask = (task) => {
 	// Удалите элемент task из DOM
 	task.remove();
 	// Например, вы можете захотеть обновить массив задач и сохранить его в локальном хранилище
-	saveToLocalStorage();
+	const newTaskDel = tasks;
+	removeFromLocalStorage(newTaskDel);
 };
 
 
