@@ -1,7 +1,5 @@
 export let tasks = [];
 
-
-
 if (localStorage.getItem('tasks')) {
 	tasks = JSON.parse(localStorage.getItem('tasks'));
 }
@@ -11,4 +9,4 @@ export const saveToLocalStorage = () => {
 }
 
 export const indexTasks = tasks.map((obj, index) => index);
-
+export const arrays = Object.values(tasks).filter(Array.isArray);

@@ -20,7 +20,7 @@ export const myTabelBtnComplecte = createBntComplecte();
 myLabel.append(myInput);
 
 const numberTasks = indexTasks;
-
+const incrementedNumber = numberTasks + 1;
 
 
 const addTask = (e) => {
@@ -71,22 +71,39 @@ const addTask = (e) => {
 
 myForm.addEventListener('submit', addTask);
 
+const deleteTask = (task) => {
+	// Удалите элемент task из DOM
+	task.remove();
+	// Например, вы можете захотеть обновить массив задач и сохранить его в локальном хранилище
+	saveToLocalStorage();
+};
+
 
 export const renderTask = (task) => {
 	const newRow = document.createElement('tr');
 	newRow.classList.add("table-light");
+	const taksProccess = "В процессе"
 	newRow.insertAdjacentHTML('beforeend', `
-		<td>${numberTasks}</td>
+		<td>${incrementedNumber}</td>
 		<td class="task">
 		  ${task.text}
 		</td>
-		<td>В процессе</td>
+		<td>${taksProccess}</td>
 	`)
 	const td = document.createElement('td');
 	td.append(myTabelBtnDel, myTabelBtnComplecte)
 	newRow.append(td);
 	const tbody = document.querySelector('tbody');
 	tbody.append(newRow);
+	myTabelBtnDel.addEventListener('click', () => {
+		deleteTask(newRow);
+	});
+	myTabelBtnComplecte.addEventListener('click', () => {
+		newRow.classList.remove("table-light");
+		newRow.classList.add("table-success");
+		newRow.querySelector('td:nth-child(2)').classList.add("text-decoration-line-through");
+		newRow.querySelector('td:nth-child(3)').textContent = "Выполнено";
+	});
 }
 
 
