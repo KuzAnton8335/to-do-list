@@ -1,9 +1,6 @@
 import {
-	createButtonDel,
-	createButtonPrimary,
-	createLabel,
 	createTableWrapper,
-	createTitle,
+	createTitle
 } from "../modules/elements.js";
 import { myButtonDel, myButtonPrim, myForm, myLabel } from "../modules/savetask.js";
 

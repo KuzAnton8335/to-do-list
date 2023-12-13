@@ -27,7 +27,6 @@ const addTask = (e) => {
 	e.preventDefault();
 
 	const input = myInput.value;
-
 	const idTask = Math.random().toString().substring(2, 10);
 	let newTask = {
 		id: Date.now(),
@@ -71,23 +70,20 @@ const addTask = (e) => {
 
 myForm.addEventListener('submit', addTask);
 
-const deleteTask = (task) => {
-	// Удалите элемент task из DOM
-	task.remove();
-	// Например, вы можете захотеть обновить массив задач и сохранить его в локальном хранилище
-	const newTaskDel = tasks;
-	removeFromLocalStorage(newTaskDel);
+const deleteTask = (newTask) => {
+	newTask.remove();
+	removeFromLocalStorage(newTask);
 };
 
 
-export const renderTask = (task) => {
+export const renderTask = (newTask) => {
 	const newRow = document.createElement('tr');
 	newRow.classList.add("table-light");
 	const taksProccess = "В процессе"
 	newRow.insertAdjacentHTML('beforeend', `
 		<td>${incrementedNumber}</td>
 		<td class="task">
-		  ${task.text}
+		  ${newTask.text}
 		</td>
 		<td>${taksProccess}</td>
 	`)
@@ -98,6 +94,7 @@ export const renderTask = (task) => {
 	tbody.append(newRow);
 	myTabelBtnDel.addEventListener('click', () => {
 		deleteTask(newRow);
+		removeTask;
 	});
 	myTabelBtnComplecte.addEventListener('click', () => {
 		newRow.classList.remove("table-light");
@@ -107,5 +104,10 @@ export const renderTask = (task) => {
 	});
 }
 
+export const removeTask = (e) => {
+	const indexToRemove = e.target.dataset.index;
+	tasks.splice(indexToRemove, 1);
+	saveToLocalStorage();
+}
 
-
+console.log(removeTask);
