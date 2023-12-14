@@ -110,4 +110,4 @@ export const removeTask = (e) => {
 	saveToLocalStorage();
 }
 
-console.log(removeTask);
+

@@ -17,7 +17,7 @@ const myPromt = () => {
 export const result = myPromt();
 
 
-const init = (selectorApp, title) => {
+export const init = (selectorApp, title) => {
 	const app = document.querySelector(selectorApp);
 	app.classList.add("vh-100", "w-100", "d-flex", "align-items-center", "justify-content-center", "flex-column")
 	const h3 = createTitle(title);
@@ -27,6 +27,5 @@ const init = (selectorApp, title) => {
 	app.append(h3, Form, tableWrapper);
 
 };
-
 
 window.todoListInit = init;

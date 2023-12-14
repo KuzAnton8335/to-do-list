@@ -1,4 +1,4 @@
- 
+
 
 export const createThead = () => {
 	const thead = document.createElement('thead');
