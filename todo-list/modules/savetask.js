@@ -19,6 +19,7 @@ export const myTabelBtnDel = createBtnDel();
 export const myTabelBtnComplecte = createBntComplecte();
 myLabel.append(myInput);
 
+
 const numberTasks = indexTasks;
 const incrementedNumber = numberTasks + 1;
 
@@ -29,8 +30,7 @@ const addTask = (e) => {
 	const input = myInput.value;
 	const idTask = Math.random().toString().substring(2, 10);
 	let newTask = {
-		id: Date.now(),
-		st: idTask,
+		id: idTask,
 		text: input,
 		done: false,
 	}
@@ -75,23 +75,31 @@ const deleteTask = (newTask) => {
 	removeFromLocalStorage(newTask);
 };
 
-
 export const renderTask = (newTask) => {
 	const newRow = document.createElement('tr');
 	newRow.classList.add("table-light");
-	const taksProccess = "В процессе"
-	newRow.insertAdjacentHTML('beforeend', `
-		<td>${incrementedNumber}</td>
-		<td class="task">
-		  ${newTask.text}
-		</td>
-		<td>${taksProccess}</td>
-	`)
-	const td = document.createElement('td');
-	td.append(myTabelBtnDel, myTabelBtnComplecte)
-	newRow.append(td);
-	const tbody = document.querySelector('tbody');
-	tbody.append(newRow);
+	const taksProccess = "В процессе";
+	const taskStatus = document.createElement('td');
+	taskStatus.textContent = `${incrementedNumber}`;
+
+	const taskText = document.createElement('td');
+	taskText.classList.add("task")
+	taskText.textContent = `${newTask.text}`;
+
+	const taskProcess = document.createElement('td');
+	taskProcess.textContent = `${taksProccess}`;
+
+	const taskButtons = document.createElement('td');
+	taskButtons.append(myTabelBtnDel, myTabelBtnComplecte);
+
+	newRow.append(taskStatus, taskText, taskProcess, taskButtons);
+
+	const insertRow = (row) => {
+		const tbody = document.querySelector('tbody');
+		tbody.insertAdjacentElement('beforeend', row);
+	}
+	insertRow(newRow);
+
 	myTabelBtnDel.addEventListener('click', () => {
 		deleteTask(newRow);
 		removeTask;
