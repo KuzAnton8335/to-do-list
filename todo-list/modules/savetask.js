@@ -19,9 +19,7 @@ export const myTabelBtnDel = createBtnDel();
 export const myTabelBtnComplecte = createBntComplecte();
 myLabel.append(myInput);
 
-
 const numberTasks = indexTasks;
-const incrementedNumber = numberTasks + 1;
 
 
 const addTask = (e) => {
@@ -34,10 +32,9 @@ const addTask = (e) => {
 		text: input,
 		done: false,
 	}
+
 	tasks.push(newTask);
-
 	saveToLocalStorage();
-
 
 	//Добавление дел
 	myButtonPrim.addEventListener('click', (e) => {
@@ -80,7 +77,7 @@ export const renderTask = (newTask) => {
 	newRow.classList.add("table-light");
 	const taksProccess = "В процессе";
 	const taskStatus = document.createElement('td');
-	taskStatus.textContent = `${incrementedNumber}`;
+	taskStatus.textContent = `${newTask.id}`;
 
 	const taskText = document.createElement('td');
 	taskText.classList.add("task")
@@ -90,27 +87,30 @@ export const renderTask = (newTask) => {
 	taskProcess.textContent = `${taksProccess}`;
 
 	const taskButtons = document.createElement('td');
-	taskButtons.append(myTabelBtnDel, myTabelBtnComplecte);
-
+	const deleteButton = createBtnDel();
+	const completeButton = createBntComplecte();
+	taskButtons.append(deleteButton, completeButton);
 	newRow.append(taskStatus, taskText, taskProcess, taskButtons);
 
-	const insertRow = (row) => {
+	const insertRow = (newRow) => {
 		const tbody = document.querySelector('tbody');
-		tbody.insertAdjacentElement('beforeend', row);
+		tbody.insertAdjacentElement('beforeend', newRow);
 	}
 	insertRow(newRow);
 
-	myTabelBtnDel.addEventListener('click', () => {
+	deleteButton.addEventListener('click', () => {
 		deleteTask(newRow);
 		removeTask;
 	});
-	myTabelBtnComplecte.addEventListener('click', () => {
+	completeButton.addEventListener('click', () => {
 		newRow.classList.remove("table-light");
 		newRow.classList.add("table-success");
 		newRow.querySelector('td:nth-child(2)').classList.add("text-decoration-line-through");
 		newRow.querySelector('td:nth-child(3)').textContent = "Выполнено";
 	});
 }
+
+
 
 export const removeTask = (e) => {
 	const indexToRemove = e.target.dataset.index;

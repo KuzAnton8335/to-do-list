@@ -13,5 +13,5 @@ export const removeFromLocalStorage = (index) => {
 	saveToLocalStorage();
 };
 
-export const indexTasks = tasks.map((obj, index) => index);
+export const indexTasks = tasks.map((_, index) => index + 1);
 export const arrays = Object.values(tasks).filter(Array.isArray);
