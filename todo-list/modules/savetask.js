@@ -19,14 +19,13 @@ export const myTabelBtnDel = createBtnDel();
 export const myTabelBtnComplecte = createBntComplecte();
 myLabel.append(myInput);
 
-const numberTasks = indexTasks;
 
 
 const addTask = (e) => {
 	e.preventDefault();
 
 	const input = myInput.value;
-	const idTask = Math.random().toString().substring(2, 10);
+	const idTask = 1;
 	let newTask = {
 		id: idTask,
 		text: input,
@@ -63,6 +62,7 @@ const addTask = (e) => {
 	myInput.value = '';
 	myInput.focus();
 
+	currentId++;
 }
 
 myForm.addEventListener('submit', addTask);
@@ -77,7 +77,7 @@ export const renderTask = (newTask) => {
 	newRow.classList.add("table-light");
 	const taksProccess = "В процессе";
 	const taskStatus = document.createElement('td');
-	taskStatus.textContent = `${newTask.id}`;
+	taskStatus.textContent = `${newTask.id++}`;
 
 	const taskText = document.createElement('td');
 	taskText.classList.add("task")
@@ -109,8 +109,6 @@ export const renderTask = (newTask) => {
 		newRow.querySelector('td:nth-child(3)').textContent = "Выполнено";
 	});
 }
-
-
 
 export const removeTask = (e) => {
 	const indexToRemove = e.target.dataset.index;
