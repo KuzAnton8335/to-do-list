@@ -61,8 +61,6 @@ const addTask = (e) => {
 
 	myInput.value = '';
 	myInput.focus();
-
-	currentId++;
 }
 
 myForm.addEventListener('submit', addTask);
