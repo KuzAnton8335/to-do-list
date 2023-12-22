@@ -5,7 +5,7 @@ import {
 	createTable,
 	createTbody
 } from "./elements.js";
-import { indexTasks, removeFromLocalStorage, saveToLocalStorage, tasks } from "./storage.js";
+import { removeFromLocalStorage, saveToLocalStorage, tasks } from "./storage.js";
 
 
 export const myInput = createInput();
@@ -23,7 +23,6 @@ myLabel.append(myInput);
 
 const addTask = (e) => {
 	e.preventDefault();
-
 	const input = myInput.value;
 	const idTask = 1;
 	let newTask = {
@@ -31,26 +30,8 @@ const addTask = (e) => {
 		text: input,
 		done: false,
 	}
-
 	tasks.push(newTask);
 	saveToLocalStorage();
-
-	//Добавление дел
-	myButtonPrim.addEventListener('click', (e) => {
-		e.preventDefault();
-		if (myInput.value.trim() !== '') {
-			myInput.value = '';
-			myButtonPrim.disabled = true;
-		}
-	});
-
-	myInput.addEventListener('input', () => {
-		if (myInput.value.trim() === '') {
-			myButtonPrim.disabled = true;
-		} else {
-			myButtonPrim.disabled = false;
-		}
-	})
 
 	myButtonDel.addEventListener('click', () => {
 		myInput.value = '';
@@ -64,6 +45,24 @@ const addTask = (e) => {
 }
 
 myForm.addEventListener('submit', addTask);
+
+//Добавление дел
+myButtonPrim.addEventListener('click', (e) => {
+	e.preventDefault();
+	if (myInput.value.trim() !== '') {
+		addTask(e);
+		myInput.value = '';
+		myButtonPrim.disabled = true;
+	}
+});
+
+myInput.addEventListener('input', () => {
+	if (myInput.value.trim() === '') {
+		myButtonPrim.disabled = true;
+	} else {
+		myButtonPrim.disabled = false;
+	}
+});
 
 const deleteTask = (newTask) => {
 	newTask.remove();
